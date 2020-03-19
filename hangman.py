@@ -1,78 +1,62 @@
-# importing the time module
-#import time
+import random   # ? for picking random word
 
-wordlist = ["fixable","glowworm","numbskull","whomever","quizzes"] # * Add more words in this list
-word_i = iter(wordlist)
+wordlist = ["fixable", "glowworm", "numbskull",
+            "whomever", "quizzes"]  # * Add more words in this list
+
+
+def checkSingle(param):
+    if(len(param) > 1):
+        return 1
+    else:
+        return 0
+
+
+def checkChar(char, guesses, left):
+    if char in guesses:
+        print(char, end="")
+    else:
+        print("_", end="")
+        left += 1
+    return left     # Number of Characters still left to guess
+
 
 while True:
-    word = next(word_i)
-
-    # creates an variable with an empty value
+    # // word = next(word_i)
+    # word = random.choice(wordlist)
+    word = "thisword"
     guesses = ''
-
-    # determine the number of tries
     tries = 10
 
-    # Create a while loop
-
-    # check if the tries are more than zero
-    while 1:
-
-        # make a counter that starts with zero
-        failed = 0
-
-        # for every character in secret_word
+    while True:
+        left = 0
         for char in word:
+            left = checkChar(char, guesses, left)
 
-            # see if the character is in the players guess
-            if char in guesses:
-
-                # print then out the character
-                print(char, end="")
-
-            else:
-
-                # if not found, print a dash
-                print("_", end="")
-
-            # and increase the failed counter with one
-                failed += 1
-
-        # if failed is equal to zero
-
-        # print You Won
-        if failed == 0:
+        # if failed is equal to zero print You Won
+        if left == 0:
             print("\nYou won")
-
-        # exit the script
             break
 
+    # if printGuessed(word, guesses) == 0:
+    #     print("You won")
+
         # ask the user go guess a character
-        guess = input("\nguess a character:")
+        guess = input("\nGuess a character:")
+        while checkSingle(guess) == 1:
+            if(checkSingle(guess) == 1):
+                print("\nEnter only one character at a time")
+                guess = input("\nguess a character:")
 
-        # set the players guess to guesses
         guesses += guess
-
-        # if the guess is not found in the secret word
         if guess not in word:
-
-            # tries counter decreases with 1 (now 9)
             tries -= 1
-
-        # print wrong
             print("\nWrong")
-
-        # how many tries are left
             print("\nYou have", + tries, 'more guesses')
 
-        # if the tries are equal to zero
             if tries == 0:
-
-                # print "You Lose"
                 print("\nYou Lose")
                 break
     again = input("Want to try again?\n")
-    # print("         =>",again)
     if(again == "no"):
         print("Thanks for playing")
         break
