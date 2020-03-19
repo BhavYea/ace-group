@@ -22,8 +22,7 @@ def checkChar(char, guesses, left):
 
 while True:
     # // word = next(word_i)
-    # word = random.choice(wordlist)
-    word = "thisword"
+    word = random.choice(wordlist)
     guesses = ''
     tries = 10
 
